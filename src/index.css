@@ -1,0 +1,17 @@
+#secondary {
+  background-color: #e7c8f1;
+  color: rgb(0, 0, 0);
+}
+
+#secondary:link {
+  color: rgb(0, 0, 0);
+}
+
+#dark {
+  background-color: #0b1422;
+  color: rgb(255, 255, 255);
+}
+
+#dark:link {
+  color: #ffffff;
+}

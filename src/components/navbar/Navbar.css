@@ -1,0 +1,7 @@
+.form-check .form-switch:focus {
+  color: white;
+}
+
+.form-check .form-switch:checked {
+  color: white;
+}

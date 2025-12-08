@@ -1,0 +1,43 @@
+.Navbar {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.Footer {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+}
+
+.App {
+  max-height: none;
+  min-height: 100vh;
+}
+
+:link {
+  color: #ffffff;
+}
+
+.Components {
+  margin-top: 4%;
+  margin-right: 5%;
+}
+
+.total {
+  margin-top: 40%;
+  margin-bottom: 20%;
+  margin-left: 20%;
+  margin-right: 20%;
+  height: 30%;
+  align-items: center;
+}
+
+.Navbar {
+  max-width: 100%;
+}
+
+.form-check .form-switch:focus {
+  color: white;
+}
+
+.form-check .form-switch:checked {
+  color: white;
+}
