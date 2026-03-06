@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
 
 import "./HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
-
-  console.log(useForm);
 
   return (
     <>

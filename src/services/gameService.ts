@@ -1,10 +1,11 @@
 import axios from "axios";
 import { Game } from "../models/Game";
+import api from "../api/axios";
 
-export const gameService = {
+const gameService = {
   async getGames(): Promise<Game[] | undefined> {
     try {
-      const res = await axios.get<Game[]>("http://localhost:8000/games");
+      const res = await api.get<Game[]>("/games");
       return res.data;
     } catch (err) {
       console.log(err);

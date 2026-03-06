@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "../api/axios";
 import { type Anime, AnimeCard } from "../models/Anime";
 
-export const animeService = {
+const animeService = {
   async getAnimes(): Promise<AnimeCard[] | undefined> {
     try {
-      const res = await axios.get<Anime[]>("http://localhost:8000/animes");
+      const res = await api.get<Anime[]>("/animes");
       let animes: AnimeCard[] = [];
       res.data.forEach((element) => {
         const anime: AnimeCard = {

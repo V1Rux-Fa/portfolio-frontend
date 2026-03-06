@@ -12,11 +12,11 @@ const SideBar = ({ theme }: Props) => {
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             backgroundColor: theme === "dark" ? "#212529" : "#6c757d",
-            width: "250px",
             height: "120vh",
             color: theme === "dark" ? "#add8e6" : "#000000ff",
           },
         }}
+        width="col-12"
       >
         <Menu>
           <MenuItem component={<Link to="/gaming" />}> Gaming </MenuItem>

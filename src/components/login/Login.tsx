@@ -1,29 +1,25 @@
 import { useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
-
-interface Person {
-  email: string;
-  password: string;
-}
+import { useNavigate } from "react-router-dom";
+import AuthService from "../../auth/authService";
+import { LoginRequest } from "../../models/Users";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<Person>();
-
-  const { state } = useLocation();
-  const { email, password } = state;
+  const { register, handleSubmit } = useForm<LoginRequest>();
 
   const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
-  const onSubmit = (data: Person) => {
-    console.log("entrou");
-    if (data.email != email || data.password != password) {
-      console.log("yeah");
+  const onSubmit = (data: LoginRequest) => {
+    try {
+      AuthService.login(data);
+
+      navigate("/home");
+    } catch (error) {
       setShowModal(true);
-    } else navigate("/home");
+    }
   };
 
   return (

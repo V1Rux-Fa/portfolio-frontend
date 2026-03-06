@@ -31,10 +31,10 @@ function App() {
           </div>
 
           <div className="row">
-            <div className="col-2 Sidebar">
+            <div className="col-12 col-md-2 Sidebar">
               <SideBar theme={theme} />
             </div>
-            <div className="col-10">
+            <div className="col-12 col-md-10">
               <div className="Components">
                 <Routes>
                   <Route path="/" element={<SignUp />} />

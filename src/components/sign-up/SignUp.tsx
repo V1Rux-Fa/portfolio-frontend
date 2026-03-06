@@ -1,25 +1,55 @@
+import * as z from "zod";
+
 import "./SignUp.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import userService from "../../services/userService";
 
-interface Person {
-  name: string;
-  lastName: string;
-  address: string;
-  email: string;
-  password: string;
-}
+const userSchema = z.object({
+  name: z
+    .string({
+      error: (name) =>
+        name.input === undefined ? "Field is required." : "Invalid input.",
+    })
+    .min(2, "Too short"),
+  lastName: z
+    .string({
+      error: (lastName) =>
+        lastName.input === undefined ? "Field is required." : "Invalid input.",
+    })
+    .min(2, "Too short"),
+  address: z
+    .string({
+      error: (address) =>
+        address.input === undefined ? "Field is required." : "Invalid input.",
+    })
+    .min(8, "Too short"),
+  email: z
+    .string({
+      error: (email) =>
+        email.input === undefined ? "Field is required." : "Invalid input.",
+    })
+    .email(),
+  password: z.string().min(1, "Field required"),
+});
+
+export type Person = z.infer<typeof userSchema>;
 
 const SignUp = () => {
-  const { register, handleSubmit } = useForm<Person>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(userSchema),
+  });
 
   const navigate = useNavigate();
 
   const onSubmit = (data: Person) => {
-    console.log(data);
-    navigate("/login", {
-      state: { email: data.email, password: data.password },
-    });
+    userService.postUsers(data);
+    navigate("/login");
   };
 
   return (
@@ -39,6 +69,7 @@ const SignUp = () => {
               id="name"
               placeholder="John"
             />
+            {errors.name?.message && <p>{errors.name?.message}</p>}
           </div>
         </div>
         <div className="form-group row">
@@ -51,6 +82,7 @@ const SignUp = () => {
               id="lastName"
               placeholder="Wick"
             />
+            {errors.lastName?.message && <p>{errors.lastName?.message}</p>}
           </div>
         </div>
         <div className="form-group row">
@@ -63,6 +95,7 @@ const SignUp = () => {
               id="email"
               placeholder="john@gmail.com"
             />
+            {errors.email?.message && <p>{errors.email?.message}</p>}
           </div>
         </div>
         <div className="form-group row">
@@ -75,6 +108,7 @@ const SignUp = () => {
               id="address"
               placeholder="street 45, apartment b"
             />
+            {errors.address?.message && <p>{errors.address?.message}</p>}
           </div>
         </div>
         <div className="form-group row">
@@ -87,6 +121,7 @@ const SignUp = () => {
               id="password"
               placeholder="Password"
             />
+            {errors.password?.message && <p>{errors.password?.message}</p>}
           </div>
         </div>
         <div className="row">

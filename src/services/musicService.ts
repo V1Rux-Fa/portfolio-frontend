@@ -1,10 +1,10 @@
-import axios from "axios";
 import { MusicCard } from "../models/Music";
+import api from "../api/axios";
 
-export const musicService = {
+const musicService = {
   async getMusics(): Promise<MusicCard[] | undefined> {
     try {
-      const res = await axios.get<MusicCard[]>("http://localhost:8000/musics");
+      const res = await api.get<MusicCard[]>("/musics");
       return res.data;
     } catch (err) {
       console.log(err);
