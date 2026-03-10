@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../auth/authService";
-import { LoginRequest } from "../../models/Users";
+import { AuthContext, LoginRequest } from "../../auth/authContext";
 
 const Login = () => {
   const { register, handleSubmit } = useForm<LoginRequest>();
@@ -11,10 +11,19 @@ const Login = () => {
   const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
-  const onSubmit = (data: LoginRequest) => {
+  if (!auth) {
+    throw new Error("AuthContext not found");
+  }
+
+  const { setUser } = auth;
+
+  const onSubmit = async (data: LoginRequest) => {
     try {
-      AuthService.login(data);
+      const user = await AuthService.login(data);
+
+      setUser(user);
 
       navigate("/home");
     } catch (error) {
@@ -80,7 +89,7 @@ const Login = () => {
                 </button>
               </div>
               <div className="modal-body">
-                <p>This account is not available!</p>
+                <p>Login failed!</p>
               </div>
             </div>
           </div>

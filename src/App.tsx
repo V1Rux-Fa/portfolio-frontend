@@ -11,9 +11,8 @@ import Food from "./components/food/Food";
 import Music from "./components/music/Music";
 import SignUp from "./components/sign-up/SignUp";
 import Login from "./components/login/Login";
-import { createContext, useState } from "react";
-
-export const ThemeContext = createContext(null);
+import { useState } from "react";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -39,11 +38,46 @@ function App() {
                 <Routes>
                   <Route path="/" element={<SignUp />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/gaming" element={<Gaming />} />
-                  <Route path="/anime" element={<Anime />} />
-                  <Route path="/food" element={<Food />} />
-                  <Route path="/music" element={<Music />} />
+                  <Route
+                    path="/home"
+                    element={
+                      <ProtectedRoute>
+                        <HomePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/gaming"
+                    element={
+                      <ProtectedRoute>
+                        <Gaming />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/anime"
+                    element={
+                      <ProtectedRoute>
+                        <Anime />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/food"
+                    element={
+                      <ProtectedRoute>
+                        <Food />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/music"
+                    element={
+                      <ProtectedRoute>
+                        <Music />
+                      </ProtectedRoute>
+                    }
+                  />
                 </Routes>
               </div>
             </div>
